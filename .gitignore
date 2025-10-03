@@ -1,3 +1,7 @@
+# Project-specific ignores
+.DS_Store
+.last_upload
+downloads/
 # Logs
 logs
 *.log
