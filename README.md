@@ -7,14 +7,14 @@ Simple samples to start serving with Shelby
 * Linux or MacOS
 
 ## 📦 Installation
-**NOTE:** This repo requires the CLI for both [Shelby](https://docs.shelby.xyz/docs/cli) and [Aptos](https://aptos.dev/build/cli). Install these first if you haven't already.
+**NOTE:** This repo requires the CLI for both [Shelby](https://docs.shelby.xyz/tools/cli) and [Aptos](https://aptos.dev/build/cli). Install these first if you haven't already.
 1. Fork this repository
 1. Clone to local filesystem
 1. Run `npm install` or equivalent
 1. Run `npm run build` or equivalent
 
 ## 🛠️ Setup
-Before working with the code in this repo, ensure that you've completed all of the steps in the [Shelby CLI Quick Start](https://docs.shelby.xyz/docs/cli) guide. This will give you access to the `shelby` command and simplify the steps described below.
+Before working with the code in this repo, ensure that you've completed all of the steps in the [Shelby CLI Getting Started](https://docs.shelby.xyz/tools/cli) guide. This will give you access to the `shelby` command and simplify the steps described below.
 
 ## 💻 Usage
 
@@ -30,7 +30,7 @@ Example interactions included in this guide:
 
 _Launch an interactive CLI that creates the configuration you want to use for integrating with Shelby._
 
-After running this command, you may notice the `.env` file we have generated. Next, fund your development address using the [Shelby faucet](https://docs.shelby.xyz/docs/faucet): sign in, paste your address, and click the `Fund` button.
+After running this command, you may notice the `.env` file we have generated. Next, fund your development address using the [ShelbyUSD faucet](https://docs.shelby.xyz/apis/faucet/shelbyusd) and [Aptos faucet](https://docs.shelby.xyz/apis/faucet/aptos) for Shelbynet: sign in, paste your address, and click the `Fund` button.
 
 This `.env` file contains all of the config options needed to use Shelby:
 1. Account address — _The Aptos account that will pay for storage_
