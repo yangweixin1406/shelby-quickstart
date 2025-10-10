@@ -4,7 +4,7 @@ import { dirname, join } from "node:path"
 import { Readable } from "node:stream"
 import { pipeline } from "node:stream/promises"
 import type { ReadableStream } from "node:stream/web"
-import { AccountAddress, Aptos, AptosConfig, Network } from "@aptos-labs/ts-sdk"
+import { AccountAddress, Network } from "@aptos-labs/ts-sdk"
 import { input } from "@inquirer/prompts"
 import { ShelbyNodeClient } from "@shelby-protocol/sdk/node"
 import chalk from "chalk"
@@ -27,12 +27,7 @@ if (!SHELBY_ACCOUNT_ADDRESS) {
 	process.exit(1)
 }
 
-const aptos = new Aptos(
-	new AptosConfig({
-		network: Network[SHELBY_NETWORK as keyof typeof Network],
-	}),
-)
-const client = new ShelbyNodeClient({ aptos, shelby: { baseUrl: SHELBY_RPC } })
+const client = new ShelbyNodeClient({ network: Network.SHELBYNET })
 
 async function main() {
 	const spinner = ora()

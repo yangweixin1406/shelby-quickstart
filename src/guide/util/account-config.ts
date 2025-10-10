@@ -37,7 +37,7 @@ export default async function accountConfig(config: ShelbyConfig): Promise<
 		const address = accounts[defaultAccount].address
 		const private_key = accounts[defaultAccount].private_key
 		const useDefault = await confirm({
-			message: `Use default account "${defaultAccount}" (${truncate(address)}) from Shelby CLI config?`,
+			message: `Would you like to use default account ${chalk.cyan(defaultAccount)} (${truncate(address)}) from Shelby CLI config?`,
 			default: true,
 		})
 		if (useDefault) {
