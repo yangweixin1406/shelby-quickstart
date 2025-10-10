@@ -1,6 +1,7 @@
 {
 	"cliDocsUrl": "https://docs.shelby.xyz/cli",
-	"faucetUrl": "https://docs.shelby.xyz/docs/faucet",
-	"defaultRPC": "https://shelby-demo.jumpisolated.com",
-	"shelbyTicker": "PROTO"
+	"shelbyFaucetUrl": "https://docs.shelby.xyz/apis/faucet/shelbyusd",
+	"aptFaucetUrl": "https://docs.shelby.xyz/apis/faucet/aptos",
+	"defaultRPC": "https://api.shelbynet.shelby.xyz/shelby",
+	"shelbyTicker": "ShelbyUSD"
 }
