@@ -31,7 +31,7 @@ try {
 	const contextSettings = await contextConfig(config)
 	if (!contextSettings) {
 		console.error(
-			`No contexts found in Shelby config. Please create one with ${cmd("shelby context create")} or use default settings.\n See: ${url(cliDocsUrl)}`,
+			`No contexts found in Shelby config. Please create one with ${cmd("shelby context create")} or use ${cmd("shelby init")}.\n See: ${url(cliDocsUrl)}`,
 		)
 		process.exit(1)
 	}
