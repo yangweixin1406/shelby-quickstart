@@ -8,7 +8,6 @@ import { cmd } from "./util/format"
 import truncate from "./util/truncate"
 
 const SHELBY_ACCOUNT_ADDRESS = process.env.SHELBY_ACCOUNT_ADDRESS
-const SHELBY_ACCOUNT_PRIVATE_KEY = process.env.SHELBY_ACCOUNT_PRIVATE_KEY
 
 if (!SHELBY_ACCOUNT_ADDRESS) {
 	console.error("SHELBY_ACCOUNT_ADDRESS is not set in", chalk.cyan(".env"))
