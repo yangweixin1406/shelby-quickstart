@@ -2,6 +2,7 @@
 .DS_Store
 .last_upload
 downloads/
+assets/*.bin
 # Logs
 logs
 *.log
