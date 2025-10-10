@@ -1,11 +1,6 @@
 import "dotenv/config"
 
-import {
-	Account,
-	AccountAddress,
-	Ed25519PrivateKey,
-	Network,
-} from "@aptos-labs/ts-sdk"
+import { AccountAddress, Network } from "@aptos-labs/ts-sdk"
 import { ShelbyNodeClient } from "@shelby-protocol/sdk/node"
 import chalk from "chalk"
 import { filesize } from "filesize"
