@@ -69,15 +69,14 @@ async function main() {
 			// FIXME: Add link to the docs about obtaining an API key
 			console.error(
 				chalk.bold.redBright(
-					"Unauthorized (401). Did you set your API key?",
+					"Unauthorized (401). This means your API key is missing or invalid.",
 				),
 			)
-			console.log(e)
-		} else {
-			console.error("Unexpected error:", e)
-			console.error("---")
-			console.error(chalk.bold.whiteBright("Please report this issue."))
+			return
 		}
+		console.error("Unexpected error:", e)
+		console.error("---")
+		console.error(chalk.bold.whiteBright("Please report this issue."))
 		process.exit(1)
 	}
 }
