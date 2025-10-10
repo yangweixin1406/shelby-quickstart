@@ -7,9 +7,7 @@ import type { ReadableStream } from "node:stream/web"
 import {
 	Account,
 	AccountAddress,
-	Aptos,
 	type AptosApiError,
-	AptosConfig,
 	Ed25519PrivateKey,
 	Network,
 } from "@aptos-labs/ts-sdk"
@@ -22,13 +20,12 @@ import { filesize } from "filesize"
 const UPLOAD_FILE = join(process.cwd(), "assets", "whitepaper.pdf")
 const TIME_TO_LIVE = 60 * 60 * 1_000_000 // 1 hour
 const BLOB_NAME = "whitepaper.pdf" // Name to assign the blob in Shelby
+
 /**
  * Load & validate env vars from the .env file created by `npm run config`
  */
-const SHELBY_NETWORK = process.env.SHELBY_NETWORK || "devnet"
 const SHELBY_ACCOUNT_PRIVATE_KEY = process.env.SHELBY_ACCOUNT_PRIVATE_KEY
 const SHELBY_ACCOUNT_ADDRESS = process.env.SHELBY_ACCOUNT_ADDRESS as string
-const SHELBY_RPC = process.env.SHELBY_RPC
 
 if (!SHELBY_ACCOUNT_ADDRESS) {
 	console.error("SHELBY_ACCOUNT_ADDRESS is not set in .env")
@@ -38,19 +35,13 @@ if (!SHELBY_ACCOUNT_PRIVATE_KEY) {
 	console.error("SHELBY_ACCOUNT_PRIVATE_KEY is not set in .env")
 	process.exit(1)
 }
-if (!SHELBY_RPC) {
-	console.error("SHELBY_RPC is not set in .env")
-	process.exit(1)
-}
+
 /**
- * Initialize Aptos & Shelby clients
+ * For now, Shelby only supports the shelbynet network
+ * In the future, you can specify which network to use
  */
-const aptos = new Aptos(
-	new AptosConfig({
-		network: Network[SHELBY_NETWORK as keyof typeof Network],
-	}),
-)
-const client = new ShelbyNodeClient({ aptos, shelby: { baseUrl: SHELBY_RPC } })
+const client = new ShelbyNodeClient({ network: Network.SHELBYNET })
+
 const signer = Account.fromPrivateKey({
 	privateKey: new Ed25519PrivateKey(SHELBY_ACCOUNT_PRIVATE_KEY),
 })
@@ -70,7 +61,9 @@ async function main() {
 			expirationMicros: Date.now() * 1000 + TIME_TO_LIVE,
 		})
 		console.log("*** Uploaded", BLOB_NAME, "successfully.")
-		console.log("*** Merkle root:", upload.blobCommitments.blob_merkle_root)
+		// No longer returning blob commitments from upload call
+		// We need to make a call for blob metadata after upload
+		// console.log("*** Merkle root:", upload.blobCommitments.blob_merkle_root)
 		/**
 		 * Retrieve a list of blobs stored on Shelby for this account
 		 */
