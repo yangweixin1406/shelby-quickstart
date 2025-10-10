@@ -3,24 +3,21 @@ import { readFileSync } from "node:fs"
 import { join } from "node:path"
 import {
 	Account,
-	Aptos,
 	type AptosApiError,
-	AptosConfig,
 	Ed25519PrivateKey,
 	Network,
 } from "@aptos-labs/ts-sdk"
 import { input, select } from "@inquirer/prompts"
 import { ShelbyNodeClient } from "@shelby-protocol/sdk/node"
 import chalk from "chalk"
-import { filesize } from "filesize"
+// import { filesize } from "filesize"
 import ora from "ora"
 import prettyMilliseconds from "pretty-ms"
-import { faucetUrl, shelbyTicker } from "../../config.json"
+import { aptFaucetUrl, shelbyFaucetUrl, shelbyTicker } from "../../config.json"
 import { navigateFileTree } from "./util/file-tree-navigator"
 import { cmd, url } from "./util/format"
 import { setLastUpload } from "./util/last-upload"
 
-const SHELBY_NETWORK = process.env.SHELBY_NETWORK || "devnet"
 const SHELBY_ACCOUNT_ADDRESS = process.env.SHELBY_ACCOUNT_ADDRESS
 const SHELBY_ACCOUNT_PRIVATE_KEY = process.env.SHELBY_ACCOUNT_PRIVATE_KEY
 const SHELBY_RPC = process.env.SHELBY_RPC
@@ -41,13 +38,10 @@ if (!SHELBY_RPC) {
 	process.exit(1)
 }
 
-const aptos = new Aptos(
-	new AptosConfig({
-		network: Network[SHELBY_NETWORK as keyof typeof Network],
-	}),
-)
-
-const client = new ShelbyNodeClient({ aptos, shelby: { baseUrl: SHELBY_RPC } })
+const client = new ShelbyNodeClient({
+	network: Network.SHELBYNET,
+	apiKey: "AG-5Y2LDN4FNNRETSQRMS9VQRFFOKVHSRZ6J",
+})
 const signer = Account.fromPrivateKey({
 	privateKey: new Ed25519PrivateKey(SHELBY_ACCOUNT_PRIVATE_KEY),
 })
@@ -108,17 +102,20 @@ async function main() {
 				"successfully!\n",
 			),
 		)
-		const blobSize = filesize(results.blobCommitments.raw_data_size)
-		console.log("Blob size:", chalk.yellow(blobSize))
+		// FIXME: No longer returning blob commitments from upload call
+		// We need to make a call for blob metadata after upload
+
+		// const blobSize = filesize(results.blobCommitments.raw_data_size)
+		// console.log("Blob size:", chalk.yellow(blobSize))
 		console.log(
 			"Full blob name:",
 			`${chalk.cyan(SHELBY_ACCOUNT_ADDRESS)}/${chalk.cyan(blobName)}`,
 		)
-		console.log(
-			"Merkle root:",
-			chalk.cyan(results.blobCommitments.blob_merkle_root),
-			"\n",
-		)
+		// console.log(
+		// 	"Merkle root:",
+		// 	chalk.cyan(results.blobCommitments.blob_merkle_root),
+		// 	"\n",
+		// )
 		setLastUpload(blobName)
 		console.log(
 			chalk.bold.whiteBright(
@@ -148,15 +145,11 @@ async function main() {
 			// FIXME: Assuming the user is always on devnet at this point
 			console.log(
 				chalk.bold.whiteBright(
-					"You need to fund your account with",
+					"You don't have enough",
 					chalk.cyan("APT"),
-					"using the",
-					url(SHELBY_NETWORK),
-					"faucet:\n",
+					"to pay for the transaction fee. Visit the faucet:\n",
 				),
-				cmd(
-					`aptos account fund-with-faucet --account ${SHELBY_ACCOUNT_ADDRESS} --amount 1000000000000000000`,
-				),
+				url(`${aptFaucetUrl}?address=${SHELBY_ACCOUNT_ADDRESS}`),
 			)
 			return
 		}
@@ -165,10 +158,8 @@ async function main() {
 				chalk.bold.whiteBright(
 					"You don't have enough",
 					chalk.cyan(shelbyTicker),
-					"to upload this blob.\nVisit the faucet:",
-					url(faucetUrl),
-					"\nEnter your address:",
-					chalk.cyan(SHELBY_ACCOUNT_ADDRESS),
+					"to upload this blob. Visit the faucet:\n",
+					url(`${shelbyFaucetUrl}?address=${SHELBY_ACCOUNT_ADDRESS}`),
 				),
 			)
 			return
