@@ -19,7 +19,7 @@ export default async function contextConfig(config: ShelbyConfig): Promise<
 		defaultContext && contextNames.includes(defaultContext)
 	if (defaultContextExists) {
 		const useDefault = await confirm({
-			message: `Would you like to use default ${chalk.cyan(defaultContext)} context from Shelby config?`,
+			message: `Would you like to use the default ${chalk.cyan(defaultContext)} context from Shelby CLI config?`,
 			default: true,
 		})
 		if (useDefault) {
