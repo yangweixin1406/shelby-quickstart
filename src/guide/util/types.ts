@@ -19,6 +19,13 @@ export interface EnvVariables {
 	address: string
 	private_key: string
 	context_name: string
-	network: string
+	network: {
+		name: string
+		fullnode: string
+		faucet: string
+		indexer: string
+		pepper: string
+		prover: string
+	}
 	api_key: string
 }
