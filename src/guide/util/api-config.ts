@@ -3,11 +3,11 @@ import { defaultApiKey } from "../../../config.json"
 import { url } from "./format"
 
 export default async function apiConfig(): Promise<{ api_key: string }> {
-	const hasApiKey = await confirm({
-		message: "Do you have an API key yet? (optional)",
-		default: false,
+	const noApiKey = await confirm({
+		message: "Would you like to use the default API key for now?",
+		default: true,
 	})
-	if (!hasApiKey) {
+	if (noApiKey) {
 		// FIXME: Add link to the docs about obtaining an API key
 		console.log(
 			"\nPlease consider obtaining an API key after completing this quickstart guide.",
