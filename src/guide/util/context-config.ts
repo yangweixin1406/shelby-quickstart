@@ -6,7 +6,6 @@ export default async function contextConfig(config: ShelbyConfig): Promise<
 	| {
 			context_name: string
 			network: string
-			rpc: string
 	  }
 	| undefined
 > {
@@ -28,7 +27,6 @@ export default async function contextConfig(config: ShelbyConfig): Promise<
 			return {
 				context_name: defaultContext,
 				network: context.aptos_network,
-				rpc: context.shelby_rpc_endpoint,
 			}
 		}
 	}
@@ -43,6 +41,5 @@ export default async function contextConfig(config: ShelbyConfig): Promise<
 	return {
 		context_name: selected,
 		network: contexts[selected].aptos_network,
-		rpc: contexts[selected].shelby_rpc_endpoint,
 	}
 }
