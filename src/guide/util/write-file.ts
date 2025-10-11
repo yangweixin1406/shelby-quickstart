@@ -4,7 +4,6 @@ import type { EnvVariables } from "./types"
 
 export default function writeFile(settings: EnvVariables) {
 	const envFile = join(process.cwd(), ".env")
-	console.log(settings)
 	const envContent = [
 		`SHELBY_ACCOUNT_NAME=${settings.account_name}`,
 		`SHELBY_ACCOUNT_ADDRESS=${settings.address}`,
