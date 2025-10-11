@@ -20,4 +20,5 @@ export interface EnvVariables {
 	private_key: string
 	context_name: string
 	network: string
+	api_key: string
 }

@@ -6,6 +6,7 @@ import {
 	shelbyTicker,
 } from "../../config.json"
 import accountConfig from "./util/account-config"
+import apiConfig from "./util/api-config"
 import contextConfig from "./util/context-config"
 import envCheck from "./util/env-check"
 import { cmd, url } from "./util/format"
@@ -35,7 +36,12 @@ try {
 		)
 		process.exit(1)
 	}
-	const writeError = writeFile({ ...accountSettings, ...contextSettings })
+	const apiSettings = await apiConfig()
+	const writeError = writeFile({
+		...accountSettings,
+		...contextSettings,
+		...apiSettings,
+	})
 	if (!writeError) {
 		// FIXME: Assuming the user is always on shelbynet at this point
 		console.log(
