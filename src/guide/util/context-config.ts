@@ -5,7 +5,14 @@ import type { ShelbyConfig } from "./types"
 export default async function contextConfig(config: ShelbyConfig): Promise<
 	| {
 			context_name: string
-			network: string
+			network: {
+				name: string
+				fullnode: string
+				faucet: string
+				indexer: string
+				pepper: string
+				prover: string
+			}
 	  }
 	| undefined
 > {

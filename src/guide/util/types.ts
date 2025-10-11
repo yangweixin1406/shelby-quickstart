@@ -7,7 +7,7 @@ export interface ShelbyConfig {
 	}
 	contexts: {
 		[name: string]: {
-			aptos_network: string
+			aptos_network: NetworkConfig
 			shelby_rpc_endpoint: string
 		}
 	}
@@ -19,13 +19,14 @@ export interface EnvVariables {
 	address: string
 	private_key: string
 	context_name: string
-	network: {
-		name: string
-		fullnode: string
-		faucet: string
-		indexer: string
-		pepper: string
-		prover: string
-	}
+	network: NetworkConfig
 	api_key: string
+}
+export interface NetworkConfig {
+	name: string
+	fullnode: string
+	faucet: string
+	indexer: string
+	pepper: string
+	prover: string
 }
