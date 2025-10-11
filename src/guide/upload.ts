@@ -20,7 +20,6 @@ import { setLastUpload } from "./util/last-upload"
 
 const SHELBY_ACCOUNT_ADDRESS = process.env.SHELBY_ACCOUNT_ADDRESS
 const SHELBY_ACCOUNT_PRIVATE_KEY = process.env.SHELBY_ACCOUNT_PRIVATE_KEY
-const SHELBY_RPC = process.env.SHELBY_RPC
 
 if (!SHELBY_ACCOUNT_ADDRESS) {
 	console.error("SHELBY_ACCOUNT_ADDRESS is not set in", chalk.cyan(".env"))
@@ -31,10 +30,6 @@ if (!SHELBY_ACCOUNT_PRIVATE_KEY) {
 		"SHELBY_ACCOUNT_PRIVATE_KEY is not set in",
 		chalk.cyan(".env"),
 	)
-	process.exit(1)
-}
-if (!SHELBY_RPC) {
-	console.error("SHELBY_RPC is not set in", chalk.cyan(".env"))
 	process.exit(1)
 }
 
