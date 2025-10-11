@@ -29,7 +29,11 @@ export default async function accountConfig(config: ShelbyConfig): Promise<
 		const account_name = accountNames[0]
 		const address = accounts[account_name].address
 		const private_key = accounts[account_name].private_key
-		return { account_name, address, private_key }
+		return {
+			account_name,
+			address,
+			private_key,
+		}
 	}
 	const defaultAccount = config.default_account || undefined
 	// There's multiple accounts. Maybe they want to use the default account?
