@@ -11,8 +11,8 @@ export default async function apiConfig(): Promise<{ api_key: string }> {
 		// FIXME: Add link to the docs about obtaining an API key
 		console.log(
 			"\nPlease consider obtaining an API key after completing this quickstart guide.",
-			"\nCreate an account for free at:",
-			url("https://geomi.dev"),
+			"\nFor more information on API keys, please see:",
+			url(apiKeyDocsUrl),
 			"\n",
 		)
 		return { api_key: defaultApiKey }
