@@ -4,6 +4,6 @@
 	"shelbyFaucetUrl": "https://docs.shelby.xyz/apis/faucet/shelbyusd",
 	"aptFaucetUrl": "https://docs.shelby.xyz/apis/faucet/aptos",
 	"defaultRPC": "https://api.shelbynet.shelby.xyz/shelby",
-	"defaultApiKey": "AG-D1FRNTSPYFJHZJZE5GOY2EMTQAR7P5YAW",
+	"defaultApiKey": "AG-MR5SFEFY8BSVMEMVG9YETVQBZJJ2QYEPF",
 	"shelbyTicker": "ShelbyUSD"
 }
