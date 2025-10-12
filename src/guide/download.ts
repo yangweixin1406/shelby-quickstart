@@ -13,14 +13,7 @@ import ora from "ora"
 import { getLastUpload } from "./util/last-upload"
 import truncate from "./util/truncate"
 
-const SHELBY_NETWORK = process.env.SHELBY_NETWORK || "devnet"
 const SHELBY_ACCOUNT_ADDRESS = process.env.SHELBY_ACCOUNT_ADDRESS
-const SHELBY_RPC = process.env.SHELBY_RPC
-
-if (!SHELBY_RPC) {
-	console.error("SHELBY_RPC is not set in", chalk.cyan(".env"))
-	process.exit(1)
-}
 
 if (!SHELBY_ACCOUNT_ADDRESS) {
 	console.error("SHELBY_ACCOUNT_ADDRESS is not set in", chalk.cyan(".env"))
