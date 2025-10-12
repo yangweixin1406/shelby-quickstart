@@ -10,6 +10,7 @@ import { ShelbyNodeClient } from "@shelby-protocol/sdk/node"
 import chalk from "chalk"
 import { filesize } from "filesize"
 import ora from "ora"
+import { cmd } from "./util/format"
 import { getLastUpload } from "./util/last-upload"
 import truncate from "./util/truncate"
 
@@ -114,7 +115,14 @@ async function main() {
 		const msg = e instanceof Error ? e.message : String(e)
 		if (/not\s*found|404/i.test(msg)) {
 			console.error(
-				chalk.bold.whiteBright("Blob not found. Did storage expire?"),
+				chalk.bold.whiteBright(
+					"Blob not found. Did storage expire?\n",
+					"\nUse",
+					cmd("npm run list"),
+					"to see your current blobs or",
+					cmd("npm run upload"),
+					"to upload a new one.\n",
+				),
 			)
 			process.exit(1)
 		}
