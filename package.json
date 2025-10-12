@@ -40,7 +40,7 @@
 		"@aptos-labs/ts-sdk": "^5.1.1",
 		"@inquirer/core": "^9.0.0",
 		"@inquirer/prompts": "^7.8.4",
-		"@shelby-protocol/sdk": "^0.0.3",
+		"@shelby-protocol/sdk": "^0.0.4",
 		"chalk": "^5.6.2",
 		"filesize": "^11.0.13",
 		"ora": "^9.0.0",
