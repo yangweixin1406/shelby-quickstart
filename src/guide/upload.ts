@@ -20,6 +20,7 @@ import { setLastUpload } from "./util/last-upload"
 
 const SHELBY_ACCOUNT_ADDRESS = process.env.SHELBY_ACCOUNT_ADDRESS
 const SHELBY_ACCOUNT_PRIVATE_KEY = process.env.SHELBY_ACCOUNT_PRIVATE_KEY
+const SHELBY_API_KEY = process.env.SHELBY_API_KEY
 
 if (!SHELBY_ACCOUNT_ADDRESS) {
 	console.error("SHELBY_ACCOUNT_ADDRESS is not set in", chalk.cyan(".env"))
@@ -32,10 +33,14 @@ if (!SHELBY_ACCOUNT_PRIVATE_KEY) {
 	)
 	process.exit(1)
 }
+if (!SHELBY_API_KEY) {
+	console.error("SHELBY_API_KEY is not set in", chalk.cyan(".env"))
+	process.exit(1)
+}
 
 const client = new ShelbyNodeClient({
 	network: Network.SHELBYNET,
-	apiKey: "AG-5Y2LDN4FNNRETSQRMS9VQRFFOKVHSRZ6J",
+	apiKey: SHELBY_API_KEY,
 })
 const signer = Account.fromPrivateKey({
 	privateKey: new Ed25519PrivateKey(SHELBY_ACCOUNT_PRIVATE_KEY),

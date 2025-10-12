@@ -14,13 +14,21 @@ import { getLastUpload } from "./util/last-upload"
 import truncate from "./util/truncate"
 
 const SHELBY_ACCOUNT_ADDRESS = process.env.SHELBY_ACCOUNT_ADDRESS
+const SHELBY_API_KEY = process.env.SHELBY_API_KEY
 
 if (!SHELBY_ACCOUNT_ADDRESS) {
 	console.error("SHELBY_ACCOUNT_ADDRESS is not set in", chalk.cyan(".env"))
 	process.exit(1)
 }
+if (!SHELBY_API_KEY) {
+	console.error("SHELBY_API_KEY is not set in", chalk.cyan(".env"))
+	process.exit(1)
+}
 
-const client = new ShelbyNodeClient({ network: Network.SHELBYNET })
+const client = new ShelbyNodeClient({
+	network: Network.SHELBYNET,
+	apiKey: SHELBY_API_KEY,
+})
 
 async function main() {
 	const spinner = ora()

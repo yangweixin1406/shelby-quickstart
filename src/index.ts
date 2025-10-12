@@ -26,6 +26,7 @@ const BLOB_NAME = "whitepaper.pdf" // Name to assign the blob in Shelby
  */
 const SHELBY_ACCOUNT_PRIVATE_KEY = process.env.SHELBY_ACCOUNT_PRIVATE_KEY
 const SHELBY_ACCOUNT_ADDRESS = process.env.SHELBY_ACCOUNT_ADDRESS as string
+const SHELBY_API_KEY = process.env.SHELBY_API_KEY
 
 if (!SHELBY_ACCOUNT_ADDRESS) {
 	console.error("SHELBY_ACCOUNT_ADDRESS is not set in .env")
@@ -35,12 +36,19 @@ if (!SHELBY_ACCOUNT_PRIVATE_KEY) {
 	console.error("SHELBY_ACCOUNT_PRIVATE_KEY is not set in .env")
 	process.exit(1)
 }
+if (!SHELBY_API_KEY) {
+	console.error("SHELBY_API_KEY is not set in .env")
+	process.exit(1)
+}
 
 /**
  * For now, Shelby only supports the shelbynet network
  * In the future, you can specify which network to use
  */
-const client = new ShelbyNodeClient({ network: Network.SHELBYNET })
+const client = new ShelbyNodeClient({
+	network: Network.SHELBYNET,
+	apiKey: SHELBY_API_KEY,
+})
 
 const signer = Account.fromPrivateKey({
 	privateKey: new Ed25519PrivateKey(SHELBY_ACCOUNT_PRIVATE_KEY),
