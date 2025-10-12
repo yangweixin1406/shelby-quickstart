@@ -1,5 +1,5 @@
 import { confirm, input } from "@inquirer/prompts"
-import { defaultApiKey } from "../../../config.json"
+import { apiKeyDocsUrl, defaultApiKey } from "../../../config.json"
 import { url } from "./format"
 
 export default async function apiConfig(): Promise<{ api_key: string }> {
