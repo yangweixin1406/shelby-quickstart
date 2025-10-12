@@ -28,8 +28,8 @@ async function main() {
 	try {
 		console.log(
 			chalk.bold.whiteBright(
-				"Listing blobs for account",
-				`${chalk.cyan(truncate(SHELBY_ACCOUNT_ADDRESS as string))}:`,
+				"Requesting blob list for account",
+				`${chalk.cyan(truncate(SHELBY_ACCOUNT_ADDRESS as string))}...`,
 			),
 		)
 		const blobs = await client.coordination.getAccountBlobs({
@@ -37,30 +37,41 @@ async function main() {
 				SHELBY_ACCOUNT_ADDRESS as string,
 			),
 		})
-		console.log(
-			chalk.bold.whiteBright(
-				"Current blobs for",
-				`${chalk.cyan(truncate(SHELBY_ACCOUNT_ADDRESS as string))}:\n`,
-			),
-		)
-		for (const blob of blobs) {
-			const expiry = new Date(
-				blob.expirationMicros / 1000,
-			).toLocaleString()
+		if (blobs.length === 0) {
+			console.log(chalk.bold.whiteBright("\nNo blobs found."))
 			console.log(
-				`· ${chalk.cyan(blob.name)} — ${chalk.yellow(
-					filesize(blob.size),
-				)}, expiring: ${chalk.cyan(expiry)}`,
+				chalk.bold.whiteBright(
+					"\nUse",
+					cmd("npm run upload"),
+					"to upload a blob to Shelby.\n",
+				),
+			)
+		} else {
+			console.log(
+				chalk.bold.whiteBright(
+					"Current blobs for",
+					`${chalk.cyan(truncate(SHELBY_ACCOUNT_ADDRESS as string))}:\n`,
+				),
+			)
+			for (const blob of blobs) {
+				const expiry = new Date(
+					blob.expirationMicros / 1000,
+				).toLocaleString()
+				console.log(
+					`· ${chalk.cyan(blob.name)} — ${chalk.yellow(
+						filesize(blob.size),
+					)}, expiring: ${chalk.cyan(expiry)}`,
+				)
+			}
+			console.log("\n")
+			console.log(
+				chalk.bold.whiteBright(
+					"Next: Use",
+					cmd("npm run download"),
+					"to pull a blob back down from Shelby.\n",
+				),
 			)
 		}
-		console.log("\n")
-		console.log(
-			chalk.bold.whiteBright(
-				"Next: Use",
-				cmd("npm run download"),
-				"to pull a blob back down from Shelby.\n",
-			),
-		)
 	} catch (e) {
 		if (e instanceof Error && e.name === "ExitPromptError") {
 			console.error(
