@@ -4,7 +4,8 @@ import { AccountAddress, Network } from "@aptos-labs/ts-sdk"
 import { ShelbyNodeClient } from "@shelby-protocol/sdk/node"
 import chalk from "chalk"
 import { filesize } from "filesize"
-import { cmd } from "./util/format"
+import { apiKeyDocsUrl, defaultApiKey } from "../../config.json"
+import { cmd, url } from "./util/format"
 import truncate from "./util/truncate"
 
 const SHELBY_ACCOUNT_ADDRESS = process.env.SHELBY_ACCOUNT_ADDRESS
@@ -94,6 +95,19 @@ async function main() {
 					"Unauthorized (401). This means your API key is missing or invalid.",
 				),
 			)
+			return
+		}
+		if (e instanceof Error && e.message.includes("429")) {
+			console.error(chalk.bold.redBright("Rate limit exceeded (429)."))
+			if (SHELBY_API_KEY === defaultApiKey) {
+				console.error(
+					chalk.bold.whiteBright(
+						"\nYou're using the default API key, which is subject to strict rate limits.",
+						"\nYou can get your own API key for free! More info:",
+						url(apiKeyDocsUrl),
+					),
+				)
+			}
 			return
 		}
 		console.error("Unexpected error:", e)

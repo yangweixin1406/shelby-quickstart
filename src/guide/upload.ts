@@ -13,7 +13,13 @@ import chalk from "chalk"
 // import { filesize } from "filesize"
 import ora from "ora"
 import prettyMilliseconds from "pretty-ms"
-import { aptFaucetUrl, shelbyFaucetUrl, shelbyTicker } from "../../config.json"
+import {
+	apiKeyDocsUrl,
+	aptFaucetUrl,
+	defaultApiKey,
+	shelbyFaucetUrl,
+	shelbyTicker,
+} from "../../config.json"
 import { navigateFileTree } from "./util/file-tree-navigator"
 import { cmd, url } from "./util/format"
 import { setLastUpload } from "./util/last-upload"
@@ -162,6 +168,19 @@ async function main() {
 					url(`${shelbyFaucetUrl}?address=${SHELBY_ACCOUNT_ADDRESS}`),
 				),
 			)
+			return
+		}
+		if (e instanceof Error && e.message.includes("429")) {
+			console.error(chalk.bold.redBright("Rate limit exceeded (429)."))
+			if (SHELBY_API_KEY === defaultApiKey) {
+				console.error(
+					chalk.bold.whiteBright(
+						"\nYou're using the default API key, which is subject to strict rate limits.",
+						"\nYou can get your own API key for free! More info:",
+						url(apiKeyDocsUrl),
+					),
+				)
+			}
 			return
 		}
 		const msg = e instanceof Error ? e.message : String(e)

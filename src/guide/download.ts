@@ -10,7 +10,8 @@ import { ShelbyNodeClient } from "@shelby-protocol/sdk/node"
 import chalk from "chalk"
 import { filesize } from "filesize"
 import ora from "ora"
-import { cmd } from "./util/format"
+import { apiKeyDocsUrl, defaultApiKey } from "../../config.json"
+import { cmd, url } from "./util/format"
 import { getLastUpload } from "./util/last-upload"
 import truncate from "./util/truncate"
 
@@ -125,6 +126,19 @@ async function main() {
 				),
 			)
 			process.exit(1)
+		}
+		if (e instanceof Error && e.message.includes("429")) {
+			console.error(chalk.bold.redBright("Rate limit exceeded (429)."))
+			if (SHELBY_API_KEY === defaultApiKey) {
+				console.error(
+					chalk.bold.whiteBright(
+						"\nYou're using the default API key, which is subject to strict rate limits.",
+						"\nYou can get your own API key for free! More info:",
+						url(apiKeyDocsUrl),
+					),
+				)
+			}
+			return
 		}
 		if (/500|internal server error/i.test(msg)) {
 			console.error(
