@@ -36,9 +36,6 @@ async function main() {
 	const spinner = ora()
 	try {
 		const lastUpload = getLastUpload()
-		console.log(
-			chalk.bold.whiteBright("Welcome to the Shelby Blob Downloader!\n"),
-		)
 		const blobName = await input({
 			message: "What is the name of the blob you would like to download?",
 			default: lastUpload || undefined,
