@@ -54,13 +54,19 @@ async function main() {
 				),
 			)
 			for (const blob of blobs) {
-				const expiry = new Date(
-					blob.expirationMicros / 1000,
-				).toLocaleString()
+				const expiryDate = new Date(blob.expirationMicros / 1000)
+				const now = new Date()
+				const isExpired = expiryDate < now
+				const expiry = expiryDate.toLocaleString()
+
+				const expiryText = isExpired
+					? `expired: ${chalk.red(expiry)}`
+					: `expiring: ${chalk.cyan(expiry)}`
+
 				console.log(
 					`· ${chalk.cyan(blob.name)} — ${chalk.yellow(
 						filesize(blob.size),
-					)}, expiring: ${chalk.cyan(expiry)}`,
+					)}, ${expiryText}`,
 				)
 			}
 			console.log("\n")
