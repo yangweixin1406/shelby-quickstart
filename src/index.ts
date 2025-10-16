@@ -123,6 +123,10 @@ async function main() {
 			)
 			return
 		}
+		if (e instanceof Error && e.message.includes("429")) {
+			console.error("*** Rate limit exceeded (429).")
+			return
+		}
 		const msg = e instanceof Error ? e.message : String(e)
 		/**
 		 * If this occurs repeatedly, please contact Shelby support!
