@@ -80,11 +80,17 @@ async function main() {
 			account: AccountAddress.fromString(SHELBY_ACCOUNT_ADDRESS),
 		})
 		for (const blob of blobs) {
-			const expiry = new Date(
-				blob.expirationMicros / 1000,
-			).toLocaleString()
+			const expiryDate = new Date(blob.expirationMicros / 1000)
+			const now = new Date()
+			const isExpired = expiryDate < now
+			const expiry = expiryDate.toLocaleString()
+
+			const expiryText = isExpired
+				? `expired: ${expiry}`
+				: `expiring: ${expiry}`
+
 			console.log(
-				`· ${blob.name} — ${filesize(blob.size)}, expiring: ${expiry}`,
+				`· ${blob.name} — ${filesize(blob.size)}, ${expiryText}`,
 			)
 		}
 		/**
