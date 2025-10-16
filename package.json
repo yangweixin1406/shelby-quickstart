@@ -12,10 +12,10 @@
 		"test": "vitest",
 		"test:run": "vitest run",
 		"type-check": "tsc --noEmit",
-		"config": "node dist/guide/config.js",
-		"upload": "node dist/guide/upload.js",
-		"download": "node dist/guide/download.js",
-		"list": "node dist/guide/list.js"
+		"config": "npx tsx src/guide/config.ts",
+		"upload": "npx tsx src/guide/upload.ts",
+		"download": "npx tsx src/guide/download.ts",
+		"list": "npx tsx src/guide/list.ts"
 	},
 	"keywords": [
 		"shelby",
