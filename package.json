@@ -4,12 +4,6 @@
 	"description": "Simple samples to start serving with Shelby",
 	"main": "dist/index.js",
 	"type": "module",
-	"exports": {
-		".": {
-			"types": "./dist/index.d.ts",
-			"import": "./dist/index.js"
-		}
-	},
 	"scripts": {
 		"build": "tsup",
 		"start": "node dist/index.js",
