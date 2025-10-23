@@ -24,10 +24,6 @@
 		"blob",
 		"storage"
 	],
-	"os": [
-		"darwin",
-		"linux"
-	],
 	"author": "Akasha <akasha@shelby.xyz>",
 	"license": "MIT",
 	"dependencies": {

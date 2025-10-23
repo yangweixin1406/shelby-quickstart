@@ -1,6 +1,6 @@
 import "dotenv/config"
 import { readFileSync } from "node:fs"
-import { join } from "node:path"
+import { join, basename } from "node:path"
 import {
 	Account,
 	type AptosApiError,
@@ -67,7 +67,7 @@ async function main() {
 		)
 		const blobName = await input({
 			message: "What would you like to name this blob on Shelby?",
-			default: uploadFile.split("/").pop(),
+			default: basename(uploadFile),
 		})
 		const duration = await select({
 			message: "How long should the blob be stored?",
