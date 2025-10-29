@@ -20,6 +20,6 @@
 		"lib": ["ES2022", "DOM"],
 		"types": ["node", "vitest/globals"]
 	},
-	"include": ["src/**/*"],
+	"include": ["src/**/*", "running"],
 	"exclude": ["node_modules", "dist", "**/*.test.ts"]
 }
