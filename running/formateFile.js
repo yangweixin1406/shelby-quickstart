@@ -23,14 +23,16 @@ console.log('Sheets:', sheetNames)
 
 const sheet = workbook.Sheets[sheetNames[0]]
 const jsonData = XLSX.utils.sheet_to_json(sheet, { defval: null })
-const data = jsonData.slice(0, 100).map((_) => {
-  const { apiKey, address, privateKey } = _
-  return {
-    apiKey,
-    address,
-    privateKey: `ed25519-priv-${privateKey}`,
-  }
-})
+const data = jsonData
+  .filter((_) => !!_.apiKey)
+  .map((_) => {
+    const { apiKey, address, privateKey } = _
+    return {
+      apiKey,
+      address,
+      privateKey: `ed25519-priv-${privateKey}`,
+    }
+  })
 
 // 写入 JSONL
 const fileStream = fs.createWriteStream(JSONL_PATH, { flags: 'w' })
