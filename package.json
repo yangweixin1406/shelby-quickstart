@@ -33,6 +33,7 @@
 		"@shelby-protocol/sdk": "^0.0.4",
 		"chalk": "^5.6.2",
 		"filesize": "^11.0.13",
+		"node-fetch": "^3.3.2",
 		"ora": "^9.0.0",
 		"pretty-ms": "^9.3.0",
 		"xlsx": "^0.18.5",
