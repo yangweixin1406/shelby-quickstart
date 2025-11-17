@@ -8,17 +8,8 @@ import { apiKeyDocsUrl, defaultApiKey } from "../../config.json"
 import { cmd, url } from "./util/format"
 import truncate from "./util/truncate"
 
-const SHELBY_ACCOUNT_ADDRESS = process.env.SHELBY_ACCOUNT_ADDRESS
-const SHELBY_API_KEY = process.env.SHELBY_API_KEY
-
-if (!SHELBY_ACCOUNT_ADDRESS) {
-	console.error("SHELBY_ACCOUNT_ADDRESS is not set in", chalk.cyan(".env"))
-	process.exit(1)
-}
-if (!SHELBY_API_KEY) {
-	console.error("SHELBY_API_KEY is not set in", chalk.cyan(".env"))
-	process.exit(1)
-}
+const SHELBY_ACCOUNT_ADDRESS = '0x2d24a702fba5ba06d25bcf952f2d69c53a5224dd0a53edc66156cf5db7d1d1f6'
+const SHELBY_API_KEY = 'aptoslabs_83Y8Tj8QsYy_PKCFBhwmo1cNKyrDr6NYSqC2iBLUg4yaK'
 
 const client = new ShelbyNodeClient({
 	network: Network.SHELBYNET,
