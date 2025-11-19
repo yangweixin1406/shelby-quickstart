@@ -30,8 +30,8 @@ mkdirSync(DOWN_DIR, { recursive: true })
 
 // ======= 上传时间选项 =======
 const CHOICES = [
-  { name: "1 minute", value: 60 * 1_000_000 },
-  { name: "1 hour", value: 60 * 60 * 1_000_000 },
+  // { name: "1 minute", value: 60 * 1_000_000 },
+  // { name: "1 hour", value: 60 * 60 * 1_000_000 },
   { name: "1 day", value: 24 * 60 * 60 * 1_000_000 },
   { name: "1 week", value: 7 * 24 * 60 * 60 * 1_000_000 },
   { name: "1 month", value: 30 * 24 * 60 * 60 * 1_000_000 },
